@@ -1,6 +1,6 @@
 ---
 language: java
-script: mvn compile package
+script: mvn compile package -P full
 
 os:
     - linux
