@@ -456,7 +456,7 @@ public class PlayQueueService {
         player.getPlayQueue().setRandomSearchCriteria(null);
         return convert(request, player, false);
     }
-    
+
     public PlayQueueInfo doSet(HttpServletRequest request, HttpServletResponse response, int[] ids) throws Exception {
         Player player = getCurrentPlayer(request, response);
         PlayQueue playQueue = player.getPlayQueue();
@@ -633,15 +633,20 @@ public class PlayQueueService {
             String streamUrl = url.replaceFirst("/dwr/.*", "/stream?player=" + player.getId() + "&id=" + file.getId() + "&auth=" + file.getHash());
             String coverArtUrl = url.replaceFirst("/dwr/.*", "/coverArt.view?id=" + file.getId() + "&auth=" + file.getHash());
 
+            String remoteStreamUrl = settingsService.rewriteRemoteUrl(streamUrl);
+            String remoteCoverArtUrl = settingsService.rewriteRemoteUrl(coverArtUrl);
+
             // Rewrite URLs in case we're behind a proxy.
             if (settingsService.isRewriteUrlEnabled()) {
                 String referer = request.getHeader("referer");
                 albumUrl = StringUtil.rewriteUrl(albumUrl, referer);
                 streamUrl = StringUtil.rewriteUrl(streamUrl, referer);
-            }
 
-            String remoteStreamUrl = settingsService.rewriteRemoteUrl(streamUrl);
-            String remoteCoverArtUrl = settingsService.rewriteRemoteUrl(coverArtUrl);
+                // And them for good measure.
+                coverArtUrl = StringUtil.rewriteUrl(coverArtUrl, referer);
+                remoteStreamUrl = StringUtil.rewriteUrl(remoteStreamUrl, referer);
+                remoteCoverArtUrl = StringUtil.rewriteUrl(remoteCoverArtUrl, referer);
+            }
 
             String format = formatFormat(player, file);
             String username = securityService.getCurrentUsername(request);
