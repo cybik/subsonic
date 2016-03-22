@@ -678,6 +678,7 @@ public class SettingsService {
     }
 
     public LicenseInfo getLicenseInfo() {
+        // TODO: fix license bollocks for remote clients.
         Date trialExpires = getTrialExpires();
         Date now = new Date();
         boolean trialValid = trialExpires.after(now);
@@ -1054,7 +1055,7 @@ public class SettingsService {
         if (cachedMusicFolders == null) {
             cachedMusicFolders = musicFolderDao.getAllMusicFolders();
         }
-        
+
         List<MusicFolder> result = new ArrayList<MusicFolder>(cachedMusicFolders.size());
         for (MusicFolder folder : cachedMusicFolders) {
             if ((includeDisabled || folder.isEnabled()) && (includeNonExisting || FileUtil.exists(folder.getPath()))) {
