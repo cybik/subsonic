@@ -17,10 +17,6 @@ deploy:
   on:
     tags: true
 
-branches:
-    only:
-        - release
-
 notifications:
     email:
         - root@cybikbase.com
