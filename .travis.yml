@@ -1,6 +1,6 @@
 ---
 language: java
-script: mvn compile package -P full
+script: mvn compile package -P full -pl '!subsonic-installer-debian,!subsonic-installer-rpm'
 
 os:
     - linux
