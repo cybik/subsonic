@@ -11,7 +11,7 @@ jdk:
 sudo: false
 deploy:
   provider: releases
-  api_key: "97a24589678150ecb68b9a7e83fbd4c35dc14fa6"
+  api_key: "${TRAVIS_TOKEN}"
   file: "subsonic-main/target/subsonic.war"
   skip_cleanup: true
   on:

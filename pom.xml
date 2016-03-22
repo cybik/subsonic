@@ -104,7 +104,15 @@
                 <module>subsonic-assembly</module>
             </modules>
         </profile>
-
+        <profile>
+            <id>nopack</id>
+            <modules>
+                <module>subsonic-booter</module>
+                <module>subsonic-backend</module>
+                <module>subsonic-site</module>
+                <module>subsonic-assembly</module>
+            </modules>
+        </profile>
     </profiles>
 
     <build>
